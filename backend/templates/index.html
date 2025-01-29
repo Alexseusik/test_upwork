@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Generator</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Email Follow-Up Generator</h1>
+        <form id="clientForm">
+            <label for="first_name">Ім’я:</label>
+            <input type="text" id="first_name" name="first_name" required>
+
+            <label for="last_name">Прізвище:</label>
+            <input type="text" id="last_name" name="last_name" required>
+
+            <label for="country">Країна:</label>
+            <input type="text" id="country" name="country" required>
+
+            <label for="city">Місто:</label>
+            <input type="text" id="city" name="city" required>
+
+            <label for="last_contact">Дата останнього контакту:</label>
+            <input type="date" id="last_contact" name="last_contact" required>
+
+            <label for="company">Назва компанії:</label>
+            <input type="text" id="company" name="company" required>
+
+            <label for="industry">Індустрія:</label>
+            <input type="text" id="industry" name="industry" required>
+
+            <label for="employees">Кількість працівників:</label>
+            <input type="text" id="employees" name="employees" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="feedback">Побажання стосовно сервісу:</label>
+            <textarea id="feedback" name="feedback" required></textarea>
+
+            <label for="language">Мова клієнта:</label>
+            <input type="text" id="language" name="language" required>
+
+            <label for="competitors">Конкуренти компанії:</label>
+            <input type="text" id="competitors" name="competitors">
+
+            <label for="chat_history">Попередній чат з менеджером:</label>
+            <textarea id="chat_history" name="chat_history" rows="4" required></textarea>
+
+            <button type="submit">Генерувати</button>
+        </form>
+
+        <div id="resultContainer" class="result"></div>
+
+    </div>
+    <script src="/static/main.js"></script>
+</body>
+</html>

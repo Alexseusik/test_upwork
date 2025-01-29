@@ -1,0 +1,126 @@
+/* 🌍 Загальні стилі (Mobile-First) */
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 📌 Контейнер */
+.container {
+    width: 90%;
+    max-width: 25rem;
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    margin: 1rem auto;
+}
+
+/* 🏷️ Заголовок */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+/* 📌 Поля форми */
+label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    display: block;
+    font-size: 1rem;
+}
+
+input, textarea, button {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 0.3rem;
+    border: 0.07rem solid #ccc;
+    font-size: 1rem;
+}
+
+/* 📄 Текстова область */
+textarea {
+    resize: vertical;
+    min-height: 3.5rem;
+}
+
+/* 🎯 Кнопка */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* 🖱️ Анімація наведення */
+button:hover {
+    background-color: #45a049;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* 🎯 Блок результату */
+.result {
+    display: none; /* ✅ Початково приховуємо контейнер */
+    background: #f0fff0; /* Світло-зелений фон */
+    border: 2px solid #4CAF50; /* Зелена рамка */
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    max-width: 100%;
+    width: 100%;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* 📲 Адаптація для планшетів (768px+) */
+@media (min-width: 48rem) { /* 768px */
+    .container {
+        max-width: 31.25rem; /* 500px */
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    input, textarea, button {
+        font-size: 1.1rem;
+        padding: 0.9rem;
+    }
+}
+
+/* 💻 Адаптація для великих екранів (1024px+) */
+@media (min-width: 64rem) { /* 1024px */
+    .container {
+        max-width: 34.375rem; /* 550px */
+    }
+}
