@@ -1,13 +1,45 @@
 from flask import Flask, render_template, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from datetime import datetime
 
 load_dotenv()
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = Flask(__name__)
+
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///history.db")
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL.replace("postgres://", "postgresql://")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class EmailHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    created_at = db.Column(db.DateTime, default=datetime.now())
+    first_name = db.Column(db.String(100), nullable=False)
+    last_name = db.Column(db.String(100), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    city = db.Column(db.String(100), nullable=False)
+    last_contact_date = db.Column(db.DateTime, nullable=False)
+    company = db.Column(db.String(255), nullable=False)
+    industry = db.Column(db.String(255), nullable=False)
+    employees = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(255), nullable=False)
+    feedback = db.Column(db.Text, nullable=True)
+    language = db.Column(db.String(50), nullable=False)
+    competitors = db.Column(db.Text, nullable=True)
+    chat_history = db.Column(db.Text, nullable=True)
+    email_text = db.Column(db.Text, nullable=False)
+
+    def __repr__(self):
+        return f"<EmailHistory {self.id} - {self.first_name} {self.last_name} ({self.company})>"
+
+with app.app_context():
+    db.create_all()
 
 @app.route('/')
 def index():
@@ -78,6 +110,27 @@ def generate_email():
             presence_penalty=0
         )
         email_text = response.choices[0].message.content.replace("\n", "\n")
+
+        new_email = EmailHistory(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            country=data['country'],
+            city=data['city'],
+            last_contact_date=data['last_contact'],
+            company=data['company'],
+            industry=data['industry'],
+            employees=data['employees'],
+            email=data['email'],
+            feedback=data['feedback'],
+            language=data['language'],
+            competitors=data['competitors'],
+            chat_history=data['chat_history'],
+            email_text=email_text
+        )
+
+        db.session.add(new_email)
+        db.session.commit()
+
         return jsonify({"email_text": email_text})
 
     except Exception as e:
