@@ -9,8 +9,6 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 app = Flask(__name__)
 
-# Налаштування API-ключа OpenAI
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -83,8 +81,9 @@ def generate_email():
         return jsonify({"email_text": email_text})
 
     except Exception as e:
-        print(f"Помилка генерації листа: {e}")  # Лог помилки
+        print(f"Помилка генерації листа: {e}")
         return jsonify({"error": "Не вдалося згенерувати текст. Деталі: " + str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
