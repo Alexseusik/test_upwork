@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 
 class EmailHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)
     country = db.Column(db.String(100), nullable=False)
